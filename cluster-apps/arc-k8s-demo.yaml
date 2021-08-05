@@ -25,7 +25,7 @@ spec:
         image: arck8sconformance.azurecr.io/samples/demo:v0.1.0
         imagePullPolicy: IfNotPresent
         ports:
-        - containerPort: 8080
+        - containerPort: 8082
         resources:
           requests:
             memory: "50Mi"
@@ -45,6 +45,6 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-  - port: 8080
+  - port: 8082
   selector:
     app: arc-k8s-demo
