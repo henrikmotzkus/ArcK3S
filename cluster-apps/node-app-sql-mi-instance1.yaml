@@ -68,7 +68,7 @@ spec:
         ports:
         - containerPort: 8080
       imagePullSecrets:
-        - name: acrsecret
+        - name: acrpullsecret
 ---
 apiVersion: v1
 kind: Service
