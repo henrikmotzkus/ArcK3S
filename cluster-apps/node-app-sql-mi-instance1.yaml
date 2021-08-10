@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: nodeapp1
-        image: henrikarcbox.azurecr.io/node-test-app-1:v3
+        image: henrikarcbox.azurecr.io/node-test-app-1:v4
         ports:
         - containerPort: 8080
       imagePullSecrets:
