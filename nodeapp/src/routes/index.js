@@ -10,7 +10,7 @@ module.exports.register = async server => {
        method: "GET",
        path: "/",
        handler: async ( request, h ) => {
-           return "My first hapi server!";
+           return "Dies ist mein erster Hapi Server. Viel Spaß damit. :-)";
        }
    } );
 };
