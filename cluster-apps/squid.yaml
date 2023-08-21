@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: squid-deployment
+  labels:
+    app: squid
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: squid
+  template:
+    metadata:
+      labels:
+        app: squid
+    spec:
+      volumes:
+        - name: log-dir
+          emptyDir: {}
+      containers:
+      - name: squid
+        image: sameersbn/squid:3.5.27-2
+          #imagePullPolicy: Never
+        ports:
+        - containerPort: 3128
+        volumeMounts:
+          - name: log-dir
+            mountPath: "/var/log/squid"
+      - name: tailer
+        image: busybox
+        command:
+        - "/bin/sh"
+        - "-c"
+        args:
+          - tail -F /var/log/squid/access.log
+        volumeMounts:
+          - name: log-dir
+            mountPath: "/var/log/squid"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: squid-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: squid
+  ports:
+    - protocol: TCP
+      port: 3128
+      targetPort: 3128
